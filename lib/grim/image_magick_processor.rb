@@ -18,7 +18,14 @@ module Grim
       command = [@ghostscript_path, "-dNODISPLAY", "-dNOSAFER", "-q",
         "-sFile=#{Shellwords.shellescape(path)}",
         File.expand_path('../../../lib/pdf_info.ps', __FILE__)]
+
+        Rails.logger.info "~~~~~~~~~~~~"
+        Rails.logger.info "#{command.join(' ')}"
+        Rails.logger.info "~~~~~~~~~~~~"
+
       result = `#{command.join(' ')}`
+      Rails.logger.info result
+      Rails.logger.info "~~~~~~~~~~~~"
       result.gsub(WarningRegex, '').to_i
     end
 
